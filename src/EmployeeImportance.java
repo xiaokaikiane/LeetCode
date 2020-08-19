@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //员工的重要程度
 //给定一个保存员工信息的数据结构，它包含了员工唯一的id，重要度 和 直系下属的id。
@@ -22,6 +20,10 @@ class Employee {
     public int importance;
     public List<Integer> subordinates;
 }
+
+/**
+ * 深度优先搜索
+ */
 public class EmployeeImportance {
     public int getImportance(List<Employee> employees, int id) {
         if(employees.isEmpty()){
@@ -41,5 +43,28 @@ public class EmployeeImportance {
             sumimportance+=func(map,ID);
         }
         return sumimportance;
+    }
+
+    /**广度优先搜索
+     * @param employees
+     * @param id
+     * @return
+     */
+    public int getImportance2(List<Employee> employees, int id){
+        Queue<Integer> queue=new LinkedList<>();
+        queue.add(id);
+        Map<Integer,Employee> map=new HashMap<>();
+        for(Employee employee:employees){
+            map.put(employee.id,employee);
+        }
+        int sum=0;
+        while(!queue.isEmpty()){
+            sum+=map.get(queue.peek()).importance;
+            int k=queue.poll();
+            for(int a:map.get(k).subordinates){
+                queue.add(a);
+            }
+        }
+        return sum;
     }
 }
