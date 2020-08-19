@@ -1,3 +1,5 @@
+package 搜索;
+
 import java.util.*;
 
 //员工的重要程度

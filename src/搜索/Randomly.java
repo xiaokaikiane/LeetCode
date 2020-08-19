@@ -1,3 +1,5 @@
+package 搜索;
+
 import java.util.*;
 
 //单词接龙
